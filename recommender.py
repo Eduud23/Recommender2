@@ -1,10 +1,13 @@
 from flask import Flask, request, jsonify
-from transformers import pipeline
+from transformers import pipeline, AutoTokenizer
 
 app = Flask(__name__)
 
-# Initialize the Hugging Face pre-trained pipeline for zero-shot classification
-classifier = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
+# Initialize the Hugging Face pre-trained pipeline for zero-shot classification with a smaller model
+classifier = pipeline("zero-shot-classification", model="distilbert-base-uncased")
+
+# Initialize tokenizer for the distilbert model
+tokenizer = AutoTokenizer.from_pretrained("distilbert-base-uncased")
 
 # Define the service and shop categories
 service_categories = [
@@ -22,6 +25,10 @@ service_categories = [
 
 # Function to recommend services based on the query
 def recommend_service(query, top_n=3, threshold=0.2):  # lowered the threshold
+    # Tokenize the input query
+    tokenized_input = tokenizer(query, return_tensors="pt")  # Tokenizing the query
+
+    # Perform zero-shot classification
     result = classifier(query, candidate_labels=service_categories)
     
     # Get the top N recommendations based on score
