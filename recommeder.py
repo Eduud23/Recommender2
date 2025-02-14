@@ -3,8 +3,8 @@ from transformers import pipeline
 
 app = Flask(__name__)
 
-# Initialize the Hugging Face pre-trained pipeline for zero-shot classification
-classifier = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
+# Initialize the Hugging Face pre-trained pipeline for zero-shot classification with a smaller model
+classifier = pipeline("zero-shot-classification", model="distilbert-base-uncased")
 
 # Define the service and shop categories
 service_categories = [
