@@ -1,4 +1,4 @@
-flask==2.2.3
-transformers==4.26.1
-tokenizers==0.12.1  
-torch==2.2.0  
+Flask==2.3.2
+transformers==4.28.1
+tokenizers==0.13.3
+torch==2.1.0
