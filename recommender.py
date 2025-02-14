@@ -3,11 +3,11 @@ from transformers import pipeline, AutoTokenizer
 
 app = Flask(__name__)
 
-# Initialize the Hugging Face pre-trained pipeline for zero-shot classification with a smaller model
-classifier = pipeline("zero-shot-classification", model="distilbert-base-uncased")
+# Initialize the Hugging Face pre-trained pipeline for zero-shot classification with BART model
+classifier = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
 
-# Initialize tokenizer for the distilbert model
-tokenizer = AutoTokenizer.from_pretrained("distilbert-base-uncased")
+# Initialize tokenizer for the BART model
+tokenizer = AutoTokenizer.from_pretrained("facebook/bart-large-mnli")
 
 # Define the service and shop categories
 service_categories = [
